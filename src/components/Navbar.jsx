@@ -1,8 +1,11 @@
 import React from "react";
 import Logo from "./logo";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
+import useAuth from "../hooks/UseAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
   const links = (
     <>
       <li>
@@ -19,6 +22,14 @@ const Navbar = () => {
       </li>
     </>
   );
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      toast.success("Logged out successfully");
+    } catch (error) {
+      toast.error("Logout failed");
+    }
+  };
   return (
     <div>
       <div className="navbar bg-base-100 shadow-sm  bg-black text-white">
@@ -55,8 +66,48 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn">Button</a>
+        <div className="navbar-end gap-2">
+          {user ? (
+            <>
+              <Link to="/dashboard" className="btn btn-ghost">
+                Dashboard
+              </Link>
+
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      src={
+                        user.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"
+                      }
+                      alt="user"
+                    />
+                  </div>
+                </label>
+
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <span className="font-medium">
+                      {user.displayName || "User"}
+                    </span>
+                  </li>
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout}>Logout</button>
+                  </li>
+                </ul>
+              </div>
+            </>
+          ) : (
+            <Link to="/login" className="btn btn-primary">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>

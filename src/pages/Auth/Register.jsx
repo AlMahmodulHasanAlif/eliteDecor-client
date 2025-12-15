@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import useAuth from "../../hooks/UseAuth";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import SocialLogin from "./SocialLogin";
 
 export default function Register() {
   const { registerUser, loading } = useAuth();
@@ -149,6 +150,7 @@ export default function Register() {
             Sign in
           </a>
         </p>
+        <SocialLogin></SocialLogin>
       </motion.div>
     </div>
   );
