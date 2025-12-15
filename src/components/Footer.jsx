@@ -5,18 +5,20 @@ const Footer = () => {
     <div>
       <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10  bg-black text-white">
         <nav>
-          <h6 className="footer-title">Services</h6>
-          <a className="link link-hover">Branding</a>
-          <a className="link link-hover">Design</a>
-          <a className="link link-hover">Marketing</a>
-          <a className="link link-hover">Advertisement</a>
+          <h6 className="footer-title">Get in Touch</h6>
+          <p className="w-90">
+            For exclusive decor consultations and custom design inquiries,
+            <br />
+            connect with our team. <br />
+            📞 +880 171111111 <br />
+            ✉️ info@yourbrand.com
+          </p>
         </nav>
         <nav>
-          <h6 className="footer-title">Company</h6>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Jobs</a>
-          <a className="link link-hover">Press kit</a>
+          <h6 className="footer-title">Hours:</h6>
+          <p className="w-40">
+            Saturday - Thursday: 10:00 AM - 8:00 PM Friday: Closed
+          </p>
         </nav>
         <nav>
           <h6 className="footer-title">Social</h6>
@@ -56,6 +58,14 @@ const Footer = () => {
             </a>
           </div>
         </nav>
+      </footer>
+      <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
+        <aside>
+          <p>
+            Copyright © {new Date().getFullYear()} - All right reserved by
+            EliteDecor Ltd
+          </p>
+        </aside>
       </footer>
     </div>
   );
