@@ -4,9 +4,11 @@ import { motion } from "framer-motion";
 import useAuth from "../../hooks/UseAuth";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import SocialLogin from "./SocialLogin";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 export default function Register() {
-  const { registerUser, loading } = useAuth();
+  const { registerUser, loading, updateUserProfile } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -16,14 +18,31 @@ export default function Register() {
     reset,
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const handleRegister = async (data) => {
     console.log(data);
+    const profileImg = data.image[0];
     try {
+      const formData = new FormData();
+      formData.append("image", profileImg);
+      const imageUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${
+        import.meta.env.VITE_image_host
+      }`;
+      axios.post(imageUrl, formData).then((res) => {
+        console.log("after upload", res.data.data.url);
+        const userProfile = {
+          displayName: data.name,
+          photoURL: res.data.data.url,
+        };
+        updateUserProfile(userProfile)
+          .then()
+          .cath((error) => console.log(error));
+      });
+
       await registerUser(data.email, data.password);
       reset();
-      console.log("User registered successfully");
+      toast.success("User registered successfully");
     } catch (error) {
-      console.error("Registration failed", error);
+      toast.error("Registration failed", error);
     }
   };
 
@@ -42,7 +61,7 @@ export default function Register() {
           Join Elite Decor for a premium experience
         </p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form onSubmit={handleSubmit(handleRegister)} className="space-y-5">
           {/* Name */}
           <div>
             <label className="mb-1 block text-sm font-medium text-white">
@@ -66,7 +85,6 @@ export default function Register() {
 
             <input
               type="file"
-              accept="image/*"
               className="w-full cursor-pointer rounded-xl border border-gray-700 bg-black px-4 py-3 text-sm text-gray-400 file:mr-4 file:rounded-lg file:border-0 file:bg-white file:px-4 file:py-2 file:text-sm file:font-medium file:text-black hover:file:bg-gray-200"
               {...register("image", {
                 required: "Profile image is required",
