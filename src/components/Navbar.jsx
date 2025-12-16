@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+
   const links = (
     <>
       <li>
@@ -26,6 +27,7 @@ const Navbar = () => {
     try {
       await logOut();
       toast.success("Logged out successfully");
+      console.log("logged out");
     } catch (error) {
       toast.error("Logout failed");
     }
@@ -73,31 +75,30 @@ const Navbar = () => {
                 Dashboard
               </Link>
 
-              <div className="dropdown dropdown-end">
+              <div className="dropdown dropdown-end ">
                 <label tabIndex={0} className="btn btn-circle avatar">
                   <div className="w-10 rounded-full">
                     <img
-                      src={
-                        user.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"
-                      }
-                      alt="user"
+                      src={user?.photoURL || "/default-avatar.png"}
+                      alt="User"
+                      referrerPolicy="no-referrer"
                     />
                   </div>
                 </label>
 
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                  className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 bg-black text-white border "
                 >
                   <li>
-                    <span className="font-medium">
+                    <span className="font-medium hover:text-gray-500">
                       {user.displayName || "User"}
                     </span>
                   </li>
-                  <li>
+                  <li className="hover:text-gray-500">
                     <Link to="/dashboard">Dashboard</Link>
                   </li>
-                  <li>
+                  <li className="hover:text-gray-500">
                     <button onClick={handleLogout}>Logout</button>
                   </li>
                 </ul>

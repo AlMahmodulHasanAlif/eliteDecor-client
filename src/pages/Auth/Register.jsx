@@ -6,6 +6,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import SocialLogin from "./SocialLogin";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router";
 
 export default function Register() {
   const { registerUser, loading, updateUserProfile } = useAuth();
@@ -17,6 +18,10 @@ export default function Register() {
     formState: { errors },
     reset,
   } = useForm();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleRegister = async (data) => {
     console.log(data);
@@ -44,6 +49,7 @@ export default function Register() {
     } catch (error) {
       toast.error("Registration failed", error);
     }
+    navigate(from, { replace: true });
   };
 
   return (
