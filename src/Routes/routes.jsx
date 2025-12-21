@@ -8,6 +8,11 @@ import ServiceDetails from "../pages/services/ServicesDetails";
 import DashboardLayout from "../layout/DashboardLayout";
 import MyProfile from "../pages/Dashboard/MyProfile";
 import MyBookings from "../pages/Dashboard/MyBookings";
+import AdminRoute from "./AdminRoute";
+import AdminDashboardLayout from "../pages/Dashboard/AdminDashboardLayout";
+import ManageServices from "../pages/admin/ManageServices";
+import ManageBookings from "../pages/admin/ManageBookings";
+import ManageUsers from "../pages/admin/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +57,22 @@ const router = createBrowserRouter([
         path: "/dashboard/my-bookings",
         Component: MyBookings,
       },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <AdminRoute>
+        <AdminDashboardLayout />
+      </AdminRoute>
+    ),
+    children: [
+      { path: "/dashboard/manage-services", 
+        element:<ManageServices />  },
+      { path: "/dashboard/manage-users", 
+      element: <ManageUsers /> },
+      { path: "/dashboard/manage-bookings/",
+         element: <ManageBookings /> },  
     ],
   },
 ]);

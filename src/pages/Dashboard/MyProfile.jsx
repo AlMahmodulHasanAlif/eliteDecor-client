@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 
 const MyProfile = () => {
   const { user } = useAuth();
+  
 
   return (
     <div>
@@ -21,10 +22,7 @@ const MyProfile = () => {
           <div className="flex justify-center mb-6">
             <div className="avatar">
               <div className="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img
-                  src={user?.photoURL || "https://i.pravatar.cc/150"}
-                  alt={user?.displayName}
-                />
+                <img src={user?.photoURL} alt={user?.displayName} />
               </div>
             </div>
           </div>

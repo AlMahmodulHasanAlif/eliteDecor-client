@@ -24,32 +24,45 @@ export default function Register() {
   const from = location.state?.from?.pathname || "/";
 
   const handleRegister = async (data) => {
-    console.log(data);
-    const profileImg = data.image[0];
     try {
+      // 1️⃣ Upload image to imgbb
+      const imageFile = data.image[0];
       const formData = new FormData();
-      formData.append("image", profileImg);
-      const imageUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${
+      formData.append("image", imageFile);
+
+      const imageUrl = `https://api.imgbb.com/1/upload?key=${
         import.meta.env.VITE_image_host
       }`;
-      axios.post(imageUrl, formData).then((res) => {
-        console.log("after upload", res.data.data.url);
-        const userProfile = {
-          displayName: data.name,
-          photoURL: res.data.data.url,
-        };
-        updateUserProfile(userProfile)
-          .then()
-          .cath((error) => console.log(error));
+
+      const imageRes = await axios.post(imageUrl, formData);
+      const photoURL = imageRes.data.data.url;
+
+      // 2️⃣ Create Firebase user
+      const result = await registerUser(data.email, data.password);
+
+      // 3️⃣ Update Firebase profile
+      await updateUserProfile({
+        displayName: data.name,
+        photoURL,
       });
 
-      await registerUser(data.email, data.password);
-      reset();
+      // 4️⃣ Save user to backend database
+      const userInfo = {
+        name: data.name,
+        email: data.email,
+        photoURL,
+        role: "user",
+      };
+
+      await axios.post("http://localhost:3000/users", userInfo);
+
       toast.success("User registered successfully");
+      reset();
+      navigate(from, { replace: true });
     } catch (error) {
-      toast.error("Registration failed", error);
+      console.error(error);
+      toast.error("Registration failed");
     }
-    navigate(from, { replace: true });
   };
 
   return (

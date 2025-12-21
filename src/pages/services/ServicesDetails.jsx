@@ -146,6 +146,13 @@ const ServiceDetails = () => {
             <p className="text-base-content/70 text-lg leading-relaxed mb-6">
               {service.description}
             </p>
+            <div className="divider"></div>
+
+            {/* Description */}
+            <h3 className="text-2xl font-semibold mb-3">Features</h3>
+            <p className="text-base-content/70 text-lg leading-relaxed mb-6">
+              {service.features}
+            </p>
 
             <div className="divider"></div>
 
