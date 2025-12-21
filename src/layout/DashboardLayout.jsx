@@ -72,11 +72,11 @@ const DashboardLayout = () => {
     ...userMenuItems, // Include all user menu items
     { divider: true }, // Add divider
     {
-      path: "/dashboard/assigned-projects",
+      path: "/decorator",
       icon: FaTasks,
       label: "Assigned Projects",
     },
-    { path: "/dashboard/schedule", icon: FaClock, label: "My Schedule" },
+  
   ];
 
   // Get menu items based on role

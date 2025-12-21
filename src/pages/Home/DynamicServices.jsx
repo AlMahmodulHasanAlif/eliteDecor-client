@@ -14,7 +14,7 @@ const DynamicServices = () => {
     queryKey: ["services", 6],
     queryFn: async () => {
       const res = await axiosSecure.get("/services?limit=6");
-      console.log(res.data);
+     
       return res.data;
     },
   });

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import RootLayout from "../layout/RootLayout";
 import Register from "../pages/Auth/Register";
 import Home from "../pages/Home/Home";
@@ -13,6 +13,10 @@ import AdminDashboardLayout from "../pages/Dashboard/AdminDashboardLayout";
 import ManageServices from "../pages/admin/ManageServices";
 import ManageBookings from "../pages/admin/ManageBookings";
 import ManageUsers from "../pages/admin/ManageUsers";
+import AssignedProjects from "../pages/decorator/AssignedProjects";
+import DecoratorRoute from "./DecoratorRoute";
+import DecoratorDashboardLayout from "../pages/decorator/DecoratorDashboardLayout";
+import Earnings from "../pages/decorator/Earnings";
 
 const router = createBrowserRouter([
   {
@@ -75,5 +79,23 @@ const router = createBrowserRouter([
          element: <ManageBookings /> },  
     ],
   },
+  
+ {
+  path: "/decorator",
+  element: (
+    <DecoratorRoute>
+      <DecoratorDashboardLayout />
+    </DecoratorRoute>
+  ),
+ children: [
+    { 
+      index: true, 
+      element: <Navigate to="/decorator/my-projects" replace /> 
+    },
+    { path: 'my-projects', element: <AssignedProjects /> },
+    { path: 'earnings', element: <Earnings /> }
+  ]
+}
+
 ]);
 export default router;
