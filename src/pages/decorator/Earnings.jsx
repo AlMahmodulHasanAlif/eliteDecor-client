@@ -4,7 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import useAxios from '../../hooks/useAxios';
 
 const Earnings = () => {
-  const { user } = useAuth();
+  const { user } = useAuth(); 
   const axiosSecure = useAxios();
 
   // Fetch earnings

@@ -17,6 +17,8 @@ import AssignedProjects from "../pages/decorator/AssignedProjects";
 import DecoratorRoute from "./DecoratorRoute";
 import DecoratorDashboardLayout from "../pages/decorator/DecoratorDashboardLayout";
 import Earnings from "../pages/decorator/Earnings";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
         path: "/services/:id",
         Component: ServiceDetails,
       },
+      {
+        path: '/about',
+        element: <About />,
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
+      }
     ],
   },
   {
@@ -95,7 +105,8 @@ const router = createBrowserRouter([
     { path: 'my-projects', element: <AssignedProjects /> },
     { path: 'earnings', element: <Earnings /> }
   ]
-}
+ },
+,
 
 ]);
 export default router;
