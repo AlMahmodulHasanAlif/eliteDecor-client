@@ -59,7 +59,7 @@ const Footer = () => {
           </div>
         </nav>
       </footer>
-      <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
+      <footer className="footer footer-horizontal footer-center bg-gray-300 text-base-content rounded p-5">
         <aside>
           <p>
             Copyright © {new Date().getFullYear()} - All right reserved by
