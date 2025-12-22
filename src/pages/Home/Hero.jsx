@@ -24,7 +24,7 @@ const Hero = () => {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="/book"
+              href="/services"
               className="inline-block rounded-xl bg-white text-black px-8 py-4 font-semibold shadow-lg hover:bg-gray-200 transition"
             >
               Book Decoration Service

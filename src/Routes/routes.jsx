@@ -19,6 +19,10 @@ import DecoratorDashboardLayout from "../pages/decorator/DecoratorDashboardLayou
 import Earnings from "../pages/decorator/Earnings";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import PaymentSuccess from "../pages/payment/PaymentSuccess";
+import PaymentCancel from "../pages/payment/PaymentCancel";
+import PrivateRoute from "./PrivateRoute";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +48,23 @@ const router = createBrowserRouter([
       {
         path: '/contact',
         element: <Contact />,
-      }
+      },
+      {
+        path: '/payment/success',
+        element: (
+        <PrivateRoute>
+          <PaymentSuccess />
+        </PrivateRoute>
+         ),
+      },
+      {
+        path: '/payment/cancel',
+        element: (
+          <PrivateRoute>
+            <PaymentCancel />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
@@ -71,6 +91,14 @@ const router = createBrowserRouter([
         path: "/dashboard/my-bookings",
         Component: MyBookings,
       },
+      {
+        path: 'payment-history',
+        element: (
+          <PrivateRoute>
+            <PaymentHistory />
+          </PrivateRoute>
+      ),
+      }
     ],
   },
   {
