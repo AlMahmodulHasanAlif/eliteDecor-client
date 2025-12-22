@@ -6,7 +6,7 @@ import heroImg from "../../assets/hero.jpg";
 const Hero = () => {
   return (
     <div>
-      <section className="relative bg-black text-white min-h-screen flex items-center">
+      <section className="relative bg-black text-white min-h-screen flex items-center py-5">
         <div className="container mx-auto px-6 md:px-12 lg:px-24 flex flex-col-reverse md:flex-row items-center justify-between">
           {/* Text */}
           <motion.div

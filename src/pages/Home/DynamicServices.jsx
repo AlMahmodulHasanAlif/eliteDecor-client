@@ -36,7 +36,7 @@ const DynamicServices = () => {
   }
 
   return (
-    <section className="py-20 bg-base-100">
+    <section className="py-20 bg-gray-200">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
