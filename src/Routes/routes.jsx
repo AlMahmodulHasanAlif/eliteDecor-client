@@ -23,11 +23,13 @@ import PaymentSuccess from "../pages/payment/PaymentSuccess";
 import PaymentCancel from "../pages/payment/PaymentCancel";
 import PrivateRoute from "./PrivateRoute";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory";
+import Error from "../components/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    errorElement: <Error />,
     children: [
       {
         index: true,
