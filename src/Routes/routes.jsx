@@ -34,12 +34,25 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
+        path: "/register",
+        Component: Register,
+      },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
         path: "/services",
         Component: Services,
       },
       {
         path: "/services/:id",
-        Component: ServiceDetails,
+       element: (
+          <PrivateRoute>
+            <ServiceDetails />
+          </PrivateRoute>
+        ),
+       
       },
       {
         path: '/about',
@@ -67,39 +80,36 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/register",
-    Component: Register,
-  },
-  {
-    path: "/login",
-    Component: Login,
-  },
-  {
-    path: "/dashboard",
-    Component: DashboardLayout,
-    children: [
-      {
-        index: true,
-        Component: MyProfile,
-      },
-      {
-        path: "/dashboard/profile",
-        Component: MyProfile,
-      },
-      {
-        path: "/dashboard/my-bookings",
-        Component: MyBookings,
-      },
-      {
-        path: 'payment-history',
-        element: (
-          <PrivateRoute>
-            <PaymentHistory />
-          </PrivateRoute>
-      ),
-      }
-    ],
+ 
+    {
+      path: "/dashboard",
+      element: (
+            <PrivateRoute>
+              <DashboardLayout />
+            </PrivateRoute>
+        ),
+      children: [
+        {
+          index: true,
+          Component: MyProfile,
+        },
+        {
+          path: "/dashboard/profile",
+          Component: MyProfile,
+        },
+        {
+          path: "/dashboard/my-bookings",
+          Component: MyBookings,
+        },
+        {
+          path: 'payment-history',
+          element: (
+            <PrivateRoute>
+              <PaymentHistory />
+            </PrivateRoute>
+        ),
+        }
+      ],
   },
   {
     path: "/dashboard",
@@ -134,7 +144,7 @@ const router = createBrowserRouter([
     { path: 'earnings', element: <Earnings /> }
   ]
  },
-,
+
 
 ]);
 export default router;

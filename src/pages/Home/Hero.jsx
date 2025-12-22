@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import heroImg from "../../assets/hero.jpg";
+
 
 const Hero = () => {
   return (
@@ -39,7 +41,7 @@ const Hero = () => {
             className="w-full md:w-1/2 flex justify-center"
           >
             <img
-              src="/src/assets/hero.jpg"
+              src={heroImg}
               alt="Luxury Home Decoration"
               className="rounded-2xl shadow-2xl border border-white"
             />

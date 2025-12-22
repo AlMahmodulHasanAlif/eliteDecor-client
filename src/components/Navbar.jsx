@@ -1,28 +1,44 @@
 import React from "react";
 import Logo from "./logo";
 import { Link, NavLink } from "react-router";
-import useAuth from "../hooks/UseAuth";
+import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
 
+  const navClass = ({ isActive }) =>
+  isActive
+    ? "text-white font-semibold border-b-2 border-white"
+    : "text-gray-400 hover:text-white transition"; 
+
   const links = (
-    <>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="/services">Services</NavLink>
-      </li>
-      <li>
-        <NavLink to="/about">About</NavLink>
-      </li>
-      <li>
-        <NavLink to="/contact">Contact</NavLink>
-      </li>
-    </>
-  );
+  <>
+    <li>
+      <NavLink to="/" end className={navClass}>
+        Home
+      </NavLink>
+    </li>
+
+    <li>
+      <NavLink to="/services" className={navClass}>
+        Services
+      </NavLink>
+    </li>
+
+    <li>
+      <NavLink to="/about" className={navClass}>
+        About
+      </NavLink>
+    </li>
+
+    <li>
+      <NavLink to="/contact" className={navClass}>
+        Contact
+      </NavLink>
+    </li>
+  </>
+);
   const handleLogout = async () => {
     try {
       await logOut();
@@ -61,9 +77,9 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">
+          <NavLink to="/">
             <Logo></Logo>
-          </a>
+          </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
