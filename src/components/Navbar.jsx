@@ -87,7 +87,7 @@ const Navbar = () => {
         <div className="navbar-end gap-2">
           {user ? (
             <>
-              <Link to="/dashboard" className="btn btn-ghost">
+              <Link to="/dashboard" className="btn">
                 Dashboard
               </Link>
 
